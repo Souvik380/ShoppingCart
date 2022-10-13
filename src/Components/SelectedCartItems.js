@@ -46,7 +46,7 @@ class SelectedCartItems extends Component {
 
                             <div className='flex justify-center space-x-3'>
                                 <button className='text-2xl font-bold' onClick={()=>this.props.add(obj.ID)}>+</button>
-                                <button className='text-2xl font-bold ' onClick={()=>this.props.del(obj.ID)}>-</button>
+                                <button className='text-2xl font-bold 'onClick={()=>this.props.del(obj.ID)}>-</button>
                             </div>
                         </div>
                     </div>

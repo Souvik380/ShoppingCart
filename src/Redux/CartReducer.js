@@ -76,11 +76,12 @@ const CartReducer=(state=initialState,action)=>{
 
         
         case "ADD":
+
             let tempItems=state.cartItems
             let tempTotal=state.total
             let sum=0
 
-            if(tempItems[action.payload]){
+            if(tempItems[action.payload] && tempItems[action.payload]['ID']!==undefined){
                 tempItems[action.payload]['Quantity']+=1
                 tempItems[action.payload]['Price']+=Xitems[action.payload].price
                 sum+=Xitems[action.payload].price
@@ -101,12 +102,34 @@ const CartReducer=(state=initialState,action)=>{
         case "DEL":
             let tempItems2=state.cartItems
             let tempTotal2=state.total
+            //----------------------------
             
-            tempItems2[action.payload]['Quantity']-=1
-            tempItems2[action.payload]['Price']-=Xitems[action.payload].price
-            tempTotal2-=Xitems[action.payload].price
+            //---------------------------------------
+            let quant=tempItems2[action.payload]['Quantity']-1
+            quant>=0?(tempItems2[action.payload]['Quantity']-=1):(tempItems2[action.payload]['Quantity']=0)
             
-            return {...state,selected:state.selected-1,cartItems:tempItems2,total:tempTotal2}
+            
+            //---------------------------------------
+
+            //---------------------------------------
+            let price=tempItems2[action.payload]['Price']-Xitems[action.payload].price
+            price>=0?(tempItems2[action.payload]['Price']-=Xitems[action.payload].price):(tempItems2[action.payload]['Price']=0)
+            //---------------------------------------
+
+            //---------------------------------------
+            let val=tempTotal2-Xitems[action.payload].price
+            val>=0?(tempTotal2-=Xitems[action.payload].price):(tempTotal2=0)
+            //---------------------------------------
+            
+            if(quant===0){
+                tempItems2[action.payload]['ID']=undefined
+            }
+
+            let ToBeDeleted=state.selected-1
+            let deletedItems
+
+            ToBeDeleted>=0?(deletedItems=ToBeDeleted):(deletedItems=0)
+            return {...state,selected:deletedItems,cartItems:tempItems2,total:tempTotal2}
 
         case "CLOSE":
             let tempItems3=state.cartItems

@@ -24,7 +24,7 @@ class Card extends Component {
           <img src={image} className="h-[300px]"/>
           <p>{this.props.title}</p>
           <p className='text-2xl font-bold '><span>$</span>{this.props.price}</p>
-          <div className='bg-black flex justify-center'>
+          <div className='hover:bg-orange-500 bg-black flex justify-center'>
             <button className='text-white text-xl font-bold py-3' onClick={()=>this.props.add(this.props.id)}>Add to Cart</button>
           </div>
         </div>
