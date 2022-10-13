@@ -1,25 +1,31 @@
-import logo from './logo.svg';
 import './App.css';
+import axios from "axios"
+import React from "react"
+import { Provider } from 'react-redux';
+import Store from './Redux/Store';
+import Cards from './Components/Cards';
+import Sizes from './Components/Sizes';
+import Cart from './Components/Cart';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component{
+
+  constructor(){
+    super()
+  }
+
+  render(){
+    
+    return(
+      <div className='App flex'>
+        <Provider store={Store}>
+          <Sizes />
+          <Cards />
+          <Cart />
+        </Provider>
+      </div>
+      
+    )
+  }
 }
 
-export default App;
+export default App
