@@ -31,48 +31,46 @@ const CartReducer=(state=initialState,action)=>{
     // console.log(state.items[0]);
     switch(action.type){
         case "clicked":
-            let prev=state.itemsToBeDisplayed
-            let products=state.items
             let newItems=[]
-
+            console.log("STATE-->",state.clicked)
             if(!state.clicked[action.payload]){
-                
                 document.getElementById(action.payload).style.background="black"
                 document.getElementById(action.payload).style.color="white"
-
-                if(!prev.includes(action.payload)){
-                    prev.push(action.payload)
-                }
 
             }else{
                 document.getElementById(action.payload).style.background="white"
                 document.getElementById(action.payload).style.color="black"
-
-                for(let i=0;i<prev.length;i++){
-                    if(prev[i]===action.payload){
-                        prev.splice(i,1)
-                    }
-                }
-            }
-
-            if(prev.length===0){
-                newItems=data.products
-            }else{
-                prev.forEach(size=>{
-                    products.forEach(product=>{
-                        product.availableSizes.forEach(productSize=>{
-                            if(productSize===size){
-                                newItems.push(product)
-                            }
-                        })
-                    })
-                })
             }
 
             let newClicked=state.clicked
             newClicked[action.payload]=!newClicked[action.payload]
+            
 
-            return {...state,clicked:newClicked,itemsToBeDisplayed:prev,items:newItems,}
+            let flags=[]
+            for(let obj in state.clicked){
+                if(state.clicked[obj]){
+                    flags.push(obj)
+                }
+            }
+            
+            
+            flags.forEach(flag=>{
+                data.products.forEach(item=>{
+                    item.availableSizes.forEach(size=>{
+                        if(size===flag){
+                            console.log(flag+" "+item.availableSizes)
+                            newItems.push(item)
+                        }
+                    })
+                })
+            })
+            
+
+            if(newItems.length===0){
+                newItems=data.products
+            }
+            
+            return {...state,clicked:newClicked,items:newItems}
 
         
         case "ADD":
