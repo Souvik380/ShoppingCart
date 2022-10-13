@@ -20,6 +20,14 @@ const mapStateToProps=(state)=>{
   }
 
 class CartItems extends Component {
+
+  handler=()=>{
+    if(this.props.total===0){
+      alert("Add some products in the cart")
+    }else{
+      alert(`"Checkout -Subtotal: ${this.props.total}"`)
+    }
+  }
     
   render() {
     return (
@@ -45,7 +53,7 @@ class CartItems extends Component {
                 <p className='text-white font-bold text-2xl'>SUBTOTAL</p>
                 <p className='text-orange-500 font-bold text-2xl'>${Number(this.props.total.toFixed(2))}</p>
             </div>
-            <button className='text-white font-bold text-2xl bg-black p-3'>CHECKOUT</button>
+            <button className='text-white font-bold text-2xl bg-black p-3' onClick={()=>this.handler()}>CHECKOUT</button>
         </div>
 
       </div>

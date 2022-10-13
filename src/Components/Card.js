@@ -21,6 +21,7 @@ class Card extends Component {
 
     return (
         <div className='m-4'>
+          {this.props.freeShipping && <div className='absolute bg-slate-400 text-white text-xs'>FreeShipping</div>}
           <img src={image} className="h-[300px]"/>
           <p>{this.props.title}</p>
           <p className='text-2xl font-bold '><span>$</span>{this.props.price}</p>

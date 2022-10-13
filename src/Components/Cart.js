@@ -33,8 +33,8 @@ class Cart extends Component {
           </div>
       ):(<div className='fixed ml-[1200px]'>
           <button onClick={()=>this.props.cartToggle()}>
-            <AiOutlineShoppingCart size="50px"/>
-              {this.props.selected}
+            <AiOutlineShoppingCart className='bg-slate-900' color="white" size="50px" values={this.props.selected} />
+            <div className='absolute top-8 left-8 text-xl px-2 rounded-full bg-orange-300'>{this.props.selected}</div>
           </button>
         </div>)
     )

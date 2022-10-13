@@ -57,8 +57,7 @@ const CartReducer=(state=initialState,action)=>{
             flags.forEach(flag=>{
                 data.products.forEach(item=>{
                     item.availableSizes.forEach(size=>{
-                        if(size===flag){
-                            console.log(flag+" "+item.availableSizes)
+                        if(size===flag && !newItems.includes(item)){
                             newItems.push(item)
                         }
                     })
